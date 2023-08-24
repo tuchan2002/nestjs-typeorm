@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  mysqldb:
+    container_name: nestjs-test_mysql
+    image: mysql:8.0
+    restart: always
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
+      - MYSQL_DATABASE=$MYSQLDB_DATABASE
+    ports:
+      - "3310:3306"
+    volumes:
+      - nest-mysql-db:/var/lib/mysql
+
+volumes:
+  nest-mysql-db:
