@@ -2,6 +2,7 @@ import { plainToInstance } from "class-transformer";
 import { UserDto } from "src/users/user.dto";
 import { Repository } from "typeorm";
 import { BaseEntity } from "./base.entity"
+import { CreateUserDto } from "src/users/create-user.dto";
 
 export class BaseService<Entity extends BaseEntity> {
     constructor(protected repo: Repository<Entity>) {
@@ -10,7 +11,7 @@ export class BaseService<Entity extends BaseEntity> {
     async create(userDto: any) {
         const savedUser = await this.repo.save(userDto);
 
-        return plainToInstance(UserDto, savedUser, {
+        return plainToInstance(CreateUserDto, savedUser, {
             excludeExtraneousValues: true
         })
     }
